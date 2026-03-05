@@ -13,6 +13,8 @@ app.use(express.json());
 const db = new MySQL();
 const isProxmox = !!process.env.PM2_HOME;
 
+console.log("init")
+
 db.init({
     host: '127.0.0.1',
     port: 3306,
@@ -40,6 +42,7 @@ const getCommon = () => {
 
 // RUTA INDEX: 5 pelis y 5 categorías
 app.get('/', async (req, res) => {
+    console.log("Entrando a /");
     try {
         const common = getCommon();
         const movies = await db.query('SELECT title, release_year, film_id FROM film LIMIT 5');
@@ -54,6 +57,7 @@ app.get('/', async (req, res) => {
 
 // RUTA MOVIES: 15 pelis con sus actores
 app.get('/movies', async (req, res) => {
+    console.log("Entrando a /movies");
     try {
         const movies = await db.query(`
             SELECT f.title, f.release_year, 
@@ -71,9 +75,10 @@ app.get('/movies', async (req, res) => {
 
 // RUTA CUSTOMERS: 25 clientes + 5 alquileres cada uno
 app.get('/customers', async (req, res) => {
+    console.log("Entrando a /customers");
     try {
         const customers = await db.query('SELECT customer_id, first_name, last_name, email FROM customer LIMIT 25');
-        
+        console.log(customers)
         // Obtenemos los alquileres para cada cliente
         for (let c of customers) {
             c.rentals = await db.query(`
