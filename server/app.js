@@ -81,8 +81,8 @@ app.get('/customers', async (req, res) => {
                 FROM rental r 
                 JOIN inventory i ON r.inventory_id = i.inventory_id 
                 JOIN film f ON i.film_id = f.film_id 
-                WHERE r.customer_id = ? 
-                LIMIT 5`, [c.customer_id]); // Uso de parámetros para evitar SQL Injection
+                WHERE r.customer_id = ${c.customer_id} 
+                LIMIT 5`); // Uso de parámetros para evitar SQL Injection
         }
         
         res.render('customers', { customers, common: getCommon() });
