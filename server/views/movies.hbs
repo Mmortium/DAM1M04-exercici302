@@ -1,41 +1,32 @@
-<!DOCTYPE html>
-<html lang="ca">
-<head>
-    {{> header}}
-    <title>Pel·lícules - Sakila</title>
-</head>
-<body>
-    {{> menu}}
-    
-    <main class="container">
-        <section class="header-movies">
-            <h1>Llista de Pel·lícules (Top 15)</h1>
-            <a href="/movieAdd" class="btn-add">Afegir Nova Pel·lícula</a>
-        </section>
+{{> header}}
+{{> menu}}
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Títol</th>
-                    <th>Any</th>
-                    <th>Actors</th>
-                    <th>Accions</th> </tr>
-            </thead>
-            <tbody>
-                {{#each movies}}
-                <tr>
-                    <td><strong>{{this.title}}</strong></td>
-                    <td>{{this.release_year}}</td>
-                    <td>{{this.actors}}</td>
-                    <td>
-                        <a href="/movie?id={{this.film_id}}" class="btn-detalls">Veure Detalls</a>
-                    </td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
-    </main>
+<main class="container">
+    <header>
+        <h1>Pel·lícules</h1>
+        <p>Llistat de les 15 primeres pel·lícules amb els seus actors.</p>
+    </header>
 
-    {{> footer}}
-</body>
-</html>
+    <section class="movies-grid">
+        {{#each movies}}
+        <article class="movie-card">
+            {{!-- Imagen genérica según estructura public/imatges/peli.png --}}
+            <div class="movie-poster">
+                <img src="/imatges/peli.png" alt="Caràtula de {{this.title}}">
+            </div>
+            
+            <div class="movie-content">
+                <h2>{{this.title}}</h2>
+                <span class="year">Any: {{this.release_year}}</span>
+                
+                <div class="actors-box">
+                    <strong>Actors:</strong>
+                    <p>{{this.actors}}</p>
+                </div>
+            </div>
+        </article>
+        {{/each}}
+    </section>
+</main>
+
+{{> footer}}
