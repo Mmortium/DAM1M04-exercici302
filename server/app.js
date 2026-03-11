@@ -19,7 +19,7 @@ db.init({
     host: '127.0.0.1',
     port: 3306,
     user: isProxmox ? 'super' : 'root',
-    password: '1234.', // Asegúrate de que esta sea la pass de tu DB
+    password: '1234.', 
     database: 'sakila',
 });
 
